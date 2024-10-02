@@ -1,5 +1,7 @@
 package ie.setu
 
+
+import ie.setu.utils.readIntNotNull
 import java.lang.System.exit
 
 fun main() {
@@ -20,8 +22,7 @@ fun mainMenu(): Int {
          > |   0) Exit                      |
          > ----------------------------------
          > ==>> """.trimMargin(">"))
-    readlnOrNull()?.toIntOrNull() ?: -1
-    return readln().toInt()
+    return readIntNotNull()
 }
 fun runMenu() {
     do {
@@ -55,4 +56,20 @@ fun deleteNote(){
 fun exitApp(){
     println("Exiting...bye")
     exit(0)
+}
+fun readNextLine(prompt: String?): String {
+    print(prompt)
+    return readln()
+}
+
+
+fun readNextChar(prompt: String?): Char {
+    do {
+        try {
+            print(prompt)
+            return readln().first()
+        } catch (e: NumberFormatException) {
+            System.err.println("\tEnter a character please.")
+        }
+    } while (true)
 }
