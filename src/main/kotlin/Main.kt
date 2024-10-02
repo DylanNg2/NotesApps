@@ -2,6 +2,7 @@ package ie.setu
 
 
 import ie.setu.utils.readIntNotNull
+import ie.setu.utils.readNextDouble
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.System.exit
 
@@ -41,9 +42,9 @@ fun runMenu() {
         }
     } while (true)
 }
-fun addNote(){
-    println("You chose Add Note")
+fun addNote() {
     logger.info { "addNote() function invoked" }
+    readNextDouble("Enter a double: ")
 }
 
 fun listNotes(){
