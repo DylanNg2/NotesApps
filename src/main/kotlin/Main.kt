@@ -1,8 +1,11 @@
 package ie.setu
 
 
+import ie.setu.controllers.NoteApi
+import ie.setu.models.Note
 import ie.setu.utils.readIntNotNull
 import ie.setu.utils.readNextDouble
+import ie.setu.utils.readNextInt
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.System.exit
 
@@ -42,14 +45,21 @@ fun runMenu() {
         }
     } while (true)
 }
-fun addNote() {
-    logger.info { "addNote() function invoked" }
-    readNextDouble("Enter a double: ")
+fun addNote(){
+    val noteTitle = readNextLine("Enter a title for the note: ")
+    val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+    val noteCategory = readNextLine("Enter a category for the note: ")
+    val isAdded = noteApi.add(Note(noteTitle, notePriority, noteCategory, false))
+
+    if (isAdded) {
+        println("Added Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
 
 fun listNotes(){
-    println("You chose List Notes")
-    logger.info { "addNote() function invoked" }
+    println(noteApi.listAllNotes())
 }
 
 fun updateNote(){
@@ -82,3 +92,4 @@ fun readNextChar(prompt: String?): Char {
         }
     } while (true)
 }
+private val noteApi = NoteApi()
